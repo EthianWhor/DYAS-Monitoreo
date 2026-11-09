@@ -1,0 +1,49 @@
+## Consulta 1: up{job="tienda"}
+  {"__name__": "up", "instance": "inventario:8082", "job": "tienda"} => 1
+  {"__name__": "up", "instance": "pedidos:8081", "job": "tienda"} => 1
+
+## Consulta 2: http_server_requests_seconds_count{application="pedidos"}
+  {"__name__": "http_server_requests_seconds_count", "application": "pedidos", "error": "none", "exception": "none", "instance": "pedidos:8081", "job": "tienda", "method": "GET", "outcome": "SUCCESS", "status": "200", "uri": "/actuator/health/**"} => 19
+  {"__name__": "http_server_requests_seconds_count", "application": "pedidos", "error": "none", "exception": "none", "instance": "pedidos:8081", "job": "tienda", "method": "GET", "outcome": "SUCCESS", "status": "200", "uri": "/actuator/prometheus"} => 42
+  {"__name__": "http_server_requests_seconds_count", "application": "pedidos", "error": "none", "exception": "none", "instance": "pedidos:8081", "job": "tienda", "method": "GET", "outcome": "SUCCESS", "status": "200", "uri": "/api/pedidos/{id}"} => 1478
+  {"__name__": "http_server_requests_seconds_count", "application": "pedidos", "error": "none", "exception": "none", "instance": "pedidos:8081", "job": "tienda", "method": "POST", "outcome": "CLIENT_ERROR", "status": "404", "uri": "/api/pedidos"} => 123
+  {"__name__": "http_server_requests_seconds_count", "application": "pedidos", "error": "none", "exception": "none", "instance": "pedidos:8081", "job": "tienda", "method": "POST", "outcome": "CLIENT_ERROR", "status": "409", "uri": "/api/pedidos"} => 110
+  {"__name__": "http_server_requests_seconds_count", "application": "pedidos", "error": "none", "exception": "none", "instance": "pedidos:8081", "job": "tienda", "method": "POST", "outcome": "SUCCESS", "status": "201", "uri": "/api/pedidos"} => 1478
+
+## Consulta 3: sum by (application) (rate(http_server_requests_seconds_count{uri!~"/actuator.*"}[1m]))
+  {"application": "inventario"} => 20.541479439640526
+  {"application": "pedidos"} => 19.145802650957286
+
+## Consulta 4: sum by (application, status) (rate(http_server_requests_seconds_count{uri!~"/actuator.*"}[1m]))
+  {"application": "inventario", "status": "200"} => 18.200324328054375
+  {"application": "inventario", "status": "404"} => 1.7251492254079976
+  {"application": "inventario", "status": "409"} => 0.5692992443846392
+  {"application": "pedidos", "status": "200"} => 8.874287224802687
+  {"application": "pedidos", "status": "404"} => 0.8119028737585439
+  {"application": "pedidos", "status": "409"} => 0.5853253275933687
+  {"application": "pedidos", "status": "201"} => 8.874287224802687
+
+## Consulta 5: sum by (application) (rate(http_server_requests_seconds_count{uri!~"/actuator.*", status=~"5.."}[1m])) / sum by (application) (rate(http_server_requests_seconds_count{uri!~"/actuator.*"}[1m]))
+  (Empty query result)
+
+## Consulta 6: histogram_quantile(0.95, sum by (application, le) (rate(http_server_requests_seconds_bucket{uri!~"/actuator.*"}[1m])))
+  {"application": "inventario"} => 0.018099057181818142
+  {"application": "pedidos"} => 0.11777605556499995
+
+## Consulta 7: sum by (resultado) (increase(pedidos_total[5m]))
+  {"resultado": "confirmado"} => 1541.7827547592385
+  {"resultado": "producto_inexistente"} => 131.00671892497198
+  {"resultado": "sin_stock"} => 113.74020156774915
+
+## Consulta 8: inventario_stock
+  {"__name__": "inventario_stock", "application": "inventario", "instance": "inventario:8082", "job": "tienda", "producto": "audifonos"} => 29120
+  {"__name__": "inventario_stock", "application": "inventario", "instance": "inventario:8082", "job": "tienda", "producto": "monitor"} => 19454
+  {"__name__": "inventario_stock", "application": "inventario", "instance": "inventario:8082", "job": "tienda", "producto": "mouse"} => 49126
+  {"__name__": "inventario_stock", "application": "inventario", "instance": "inventario:8082", "job": "tienda", "producto": "portatil"} => 0
+  {"__name__": "inventario_stock", "application": "inventario", "instance": "inventario:8082", "job": "tienda", "producto": "teclado"} => 49264
+
+## Consulta 9: sum by (application) (jvm_memory_used_bytes{area="heap"})
+  {"application": "inventario"} => 46021992
+  {"application": "pedidos"} => 29728312
+
+Tomado: 2026-11-09T03:23:35Z (sin fallas activas, k6 a 10 it/s)

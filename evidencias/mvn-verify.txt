@@ -1,0 +1,13 @@
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 27.54 s -- in edu.unisabana.dyas.tienda.comun.TrazasConfigTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 35.58 s -- in edu.unisabana.dyas.tienda.inventario.InventarioControllerTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.922 s -- in edu.unisabana.dyas.tienda.inventario.InventarioServiceTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.441 s -- in edu.unisabana.dyas.tienda.inventario.SimuladorFallasTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.805 s -- in edu.unisabana.dyas.tienda.pedidos.InventarioClienteHttpTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.010 s -- in edu.unisabana.dyas.tienda.pedidos.PedidoControllerTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.575 s -- in edu.unisabana.dyas.tienda.pedidos.PedidoServiceTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 61.44 s -- in edu.unisabana.dyas.tienda.TiendaApplicationTest$PerfilInventario
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.65 s -- in edu.unisabana.dyas.tienda.TiendaApplicationTest$PerfilPedidos
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 72.12 s -- in edu.unisabana.dyas.tienda.TiendaApplicationTest
+[INFO] Tests run: 47, Failures: 0, Errors: 0, Skipped: 0
+[INFO] All coverage checks have been met.
+[INFO] BUILD SUCCESS

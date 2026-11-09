@@ -1,5 +1,12 @@
 # Taller de Monitoreo y Observabilidad con Prometheus, Grafana y Jaeger
 
+> **Entrega del taller**
+>
+> - **Integrantes:** Ethian White – ethianwhor@unisabana.edu.co (ver [`integrantes.txt`](integrantes.txt)).
+> - **Documentación:** en el [Wiki del repositorio](https://github.com/EthianWhor/DYAS-Monitoreo/wiki).
+> - **Evidencias:** capturas en [`evidencias/img/`](evidencias/img) y salidas de comandos en [`evidencias/`](evidencias).
+> - **Panel nuevo del equipo:** fila *Paneles del equipo* en [`grafana/dashboards/tienda.json`](grafana/dashboards/tienda.json).
+
 Este taller tiene como objetivo aprender a **instrumentar una aplicación**, **recolectar sus métricas y trazas** y **visualizarlas** para entender qué está pasando en un sistema que ya está desplegado en contenedores.
 Se asume que conoces Docker y Docker Compose. En la **entrega 3 del proyecto del curso** la observabilidad es una **bonificación (+5)**: métricas de la aplicación con un tablero en Grafana ligado al SLO (latencia p95, tasa de error y *throughput*), o logs centralizados con búsqueda.
 

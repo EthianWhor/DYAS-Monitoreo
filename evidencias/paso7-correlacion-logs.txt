@@ -1,0 +1,7 @@
+$ docker compose logs pedidos | grep ERROR   (última línea)
+pedidos-1  | 2026-11-09T03:31:23.383Z ERROR 1 --- [pedidos] [io-8081-exec-23] [44ac60d7fc8122ca4b4f6982ac39081a-478c3000ce931b47] e.u.dyas.tienda.comun.ManejadorErrores   : Error al atender la solicitud: El inventario respondió 500
+
+$ docker compose logs inventario | grep 44ac60d7fc8122ca4b4f6982ac39081a
+inventario-1  | 2026-11-09T03:31:23.380Z ERROR 1 --- [inventario] [io-8082-exec-14] [44ac60d7fc8122ca4b4f6982ac39081a-5d00c0a26dd8168b] e.u.dyas.tienda.comun.ManejadorErrores   : Error al atender la solicitud: Falla simulada en el servicio de inventario
+
+Traza en Jaeger: http://localhost:16686/trace/44ac60d7fc8122ca4b4f6982ac39081a

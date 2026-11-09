@@ -1,0 +1,2 @@
+LatenciaP95Alta inventario firing 2026-11-09T03:32:08.510430208Z El p95 de la latencia es 813.6ms (umbral: 500 ms).
+LatenciaP95Alta pedidos firing 2026-11-09T03:32:08.510430208Z El p95 de la latencia es 857.2ms (umbral: 500 ms).

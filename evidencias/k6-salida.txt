@@ -1,0 +1,53 @@
+$ docker compose run --rm -e DURACION=40m k6   (detenido manualmente a los ~17 min, al terminar las pruebas del paso 6)
+ Container dyasmonitoreo-jaeger-1 Running 
+ Container dyasmonitoreo-inventario-1 Running 
+ Container dyasmonitoreo-pedidos-1 Running 
+ Container dyasmonitoreo-inventario-1 Waiting 
+ Container dyasmonitoreo-inventario-1 Healthy 
+ Container dyasmonitoreo-pedidos-1 Waiting 
+ Container dyasmonitoreo-pedidos-1 Healthy 
+ Container dyasmonitoreo-k6-run-745ea42e9b7f Creating 
+ Container dyasmonitoreo-k6-run-745ea42e9b7f Created 
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: /scripts/trafico.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 100 max VUs, 40m30s max duration (incl. graceful stop):
+              * trafico: 10.00 iterations/s for 40m0s (maxVUs: 10-100, gracefulStop: 30s)
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 10178  10.335359/s
+    checks_succeeded...: 91.36% 9299 out of 10178
+    checks_failed......: 8.63%  879 out of 10178
+
+    ✗ el pedido no terminó en 5xx
+      ↳  91% — ✓ 9299 / ✗ 879
+
+    HTTP
+    http_req_duration..............: avg=91.98ms min=-640740591ns med=2.92ms   max=3.88s p(90)=444.42ms p(95)=803.34ms
+      { expected_response:true }...: avg=90.99ms min=-640740591ns med=2.54ms   max=2.62s p(90)=487.59ms p(95)=803.17ms
+    http_req_failed................: 13.88% 3917 out of 28207
+    http_reqs......................: 28207  28.643101/s
+
+    EXECUTION
+    dropped_iterations.............: 29     0.029448/s
+    iteration_duration.............: avg=369.3ms min=103.81ms     med=113.58ms max=4s    p(90)=1.7s     p(95)=1.71s   
+    iterations.....................: 10177  10.334344/s
+    vus............................: 1      min=0             max=25
+    vus_max........................: 28     min=10            max=28
+
+    NETWORK
+    data_received..................: 5.6 MB 5.7 kB/s
+    data_sent......................: 3.3 MB 3.4 kB/s
+
+trafico ✗ [  43% ] 000/028 VUs  17m00.7s/40m0s  10.00 iters/s
+time="2026-11-09T03:37:06Z" level=error msg="test run was aborted because k6 received a 'terminated' signal"
+

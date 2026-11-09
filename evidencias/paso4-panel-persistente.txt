@@ -1,0 +1,16 @@
+$ docker compose down -v && docker compose up -d
+$ curl -s http://localhost:3000/api/dashboards/uid/tienda-observabilidad  (títulos de los paneles)
+  1 row - Tráfico HTTP (método RED)
+  2 timeseries - Peticiones por segundo
+  3 timeseries - Tasa de errores 5xx
+  4 timeseries - Latencia p95
+  5 timeseries - Peticiones por endpoint y código de estado
+  6 row - Métricas de negocio (propias)
+  7 timeseries - Pedidos por resultado (por minuto)
+  8 timeseries - Stock del inventario
+  9 row - JVM (método USE)
+  10 timeseries - Memoria heap usada
+  11 timeseries - Uso de CPU del proceso
+  12 row - Paneles del equipo
+  13 timeseries - Inventario: peticiones por segundo por endpoint
+  14 stat - Disponibilidad POST /api/pedidos (30 min, SLO 99%)

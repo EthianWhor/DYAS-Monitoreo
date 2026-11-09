@@ -1,0 +1,29 @@
+$ docker compose ps
+SERVICE      IMAGE                         STATUS
+grafana      grafana/grafana:13.2.3        Up 46 seconds (health: starting)
+inventario   dyasmonitoreo/tienda:1.0      Up 58 seconds (healthy)
+jaeger       jaegertracing/jaeger:2.21.0   Up 59 seconds
+pedidos      dyasmonitoreo/tienda:1.0      Up 34 seconds (healthy)
+prometheus   prom/prometheus:v3.15.0       Up 58 seconds (healthy)
+
+$ curl -s http://localhost:8082/api/inventario/teclado
+{"producto":"teclado","stock":50000}
+
+$ curl -s -X POST http://localhost:8081/api/pedidos -d {"producto":"teclado","cantidad":2}
+{"id":1,"producto":"teclado","cantidad":2,"fecha":"2026-11-09T03:20:23.584523233Z"}  -> HTTP 201
+
+$ curl -s -X POST http://localhost:8081/api/pedidos -d {"producto":"portatil","cantidad":1}
+{"detail":"Stock insuficiente de 'portatil'","instance":"/api/pedidos","status":409,"title":"Conflict"}  -> HTTP 409
+
+$ curl -s -X POST http://localhost:8081/api/pedidos -d {"producto":"tablet","cantidad":1}
+{"detail":"No existe el producto 'tablet'","instance":"/api/pedidos","status":404,"title":"Not Found"}  -> HTTP 404
+
+$ curl -s http://localhost:8081/api/pedidos/1
+{"id":1,"producto":"teclado","cantidad":2,"fecha":"2026-11-09T03:20:23.584523233Z"}
+
+$ curl -s http://localhost:8081/actuator/prometheus | grep pedidos_total
+# HELP pedidos_total Pedidos procesados, por resultado
+# TYPE pedidos_total counter
+pedidos_total{application="pedidos",resultado="confirmado"} 1.0
+pedidos_total{application="pedidos",resultado="producto_inexistente"} 1.0
+pedidos_total{application="pedidos",resultado="sin_stock"} 1.0
